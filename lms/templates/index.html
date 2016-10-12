@@ -1,0 +1,125 @@
+<%inherit file="main.html" />
+<%namespace name='static' file='static_content.html'/>
+<%!
+from django.utils.translation import ugettext as _
+from django.core.urlresolvers import reverse
+from microsite_configuration import microsite
+%>
+
+<%
+  homepage_overlay_html = microsite.get_value('homepage_overlay_html')
+
+  ## To display a welcome video, change False to True, and add a YouTube ID (11 chars, eg "123456789xX") in the following line
+  show_homepage_promo_video = microsite.get_value('show_homepage_promo_video', False)
+  homepage_promo_video_youtube_id = microsite.get_value('homepage_promo_video_youtube_id', "your-youtube-id")
+
+  show_partners = microsite.get_value('show_partners', True)
+
+%>
+
+<section class="home">
+    <center>
+
+  <script type=text/javascript src="/static/js/jquery.js"></script>
+  <script type=text/javascript src="/static/js/js.js"></script>
+  <script type="text/javascript" src="/static/js/jquery-1.4.2.min.js"></script>
+ <script type="text/javascript" src="http://101.201.73.75:8888/static/js/keydowntest.js"></script>
+  <script type="text/javascript" >
+  
+    
+	function moveleft(){
+		var scrleft = $(".mylink").scrollLeft();
+		if(scrleft>0) $(".mylink").animate({scrollLeft:(scrleft-214)},500);
+	}
+	function moveright(){
+		var licount = $(".school-list").children("li").size(); //li个数
+		var perwidth = 214;//每个li的宽度和左控的和
+		var liwidths = licount * perwidth; //所有li的总宽度
+		var targetScrol = liwidths - 1206;//li总宽度减去外层div的宽度。即得到滚动条需要滚动的长度
+		var scrleft = $(".mylink").scrollLeft();//目前滚动条的滚动长度
+		if(!isNaN(targetScrol) && (scrleft < targetScrol)){
+			$(".mylink").animate({"scrollLeft":scrleft+perwidth},500); //若 目前的滚动条的长度小于 最终需要滚动的长度，则向左拉动滚动条，拉动的距离为 一个li的宽度和它的左外空的距离。
+		}
+		
+	}
+</script>
+    
+    
+<div class="content">
+  <div class="area">
+    <a id=prev class="prevBtn qq" href="javascript:void(0)"></a>
+    <a id=next class="nextBtn qq" href="javascript:void(0)"></a>
+	<div id=js class="js">
+		<div class="box01">
+          <img alt="产外观品" src="/static/images/floatimages/banner-1.jpg" />
+      	  <img alt="功能"  class="img_display"  alt="功能页面" src="/static/images/floatimages/banner-2.jpg"> 
+		  <img  class="img_display" src="/static/images/floatimages/banner-3.jpg">
+		  <img  class="img_display" alt="在线购买" src="/static/images/floatimages/banner-4.jpg"> 
+		</div>
+
+		<div id=jsNav class=jsNav>	
+			<a class="trigger imgSelected" href="javascript:void(0)"></a>
+			<a class="trigger" href="javascript:void(0)"></a>
+			<a class="trigger" href="javascript:void(0)"></a>
+		    <a class="trigger" href="javascript:void(0)"></a> 
+		</div>
+	</div>
+  </div>
+</div> 
+   
+    
+  <section class="courses-container">
+    <section class="highlighted-courses">
+
+      % if settings.FEATURES.get('COURSES_ARE_BROWSABLE'):
+        <section class="courses">
+            <ul class="courses-listing">
+            ## limiting the course number by using HOMEPAGE_COURSE_MAX as the maximum number of courses
+            %for course in courses[:settings.HOMEPAGE_COURSE_MAX]:
+              <li class="courses-listing-item">
+                <%include file="course.html" args="course=course" />
+              </li>
+            %endfor
+            </ul>
+        </section>
+        ## in case there are courses that are not shown on the homepage, a 'View all Courses' link should appear
+        % if settings.HOMEPAGE_COURSE_MAX and len(courses) > settings.HOMEPAGE_COURSE_MAX:
+          <div class="courses-more">
+            <a class="courses-more-cta" href="${marketing_link('COURSES')}" > ${_("View all Courses")} </a>
+          </div>
+        % endif
+      % endif
+
+    </section>
+  </section>
+</section>
+
+<section id="video-modal" class="modal home-page-video-modal video-modal">
+  <div class="inner-wrapper">
+    <%
+      youtube_video_id = homepage_promo_video_youtube_id
+      if self.stanford_theme_enabled():
+        youtube_video_id = "2gmreZObCY4"
+    %>
+    <iframe title="YouTube Video" width="640" height="360" src="//www.youtube.com/embed/${youtube_video_id}?showinfo=0" frameborder="0" allowfullscreen></iframe>
+  </div>
+</center>
+</section>
+
+<%block name="js_extra">
+   <script type="text/javascript">
+      $(window).load(function() {
+         if(getParameterByName('next')) {
+              $('#login').trigger("click");
+         }
+      })
+   </script>
+</%block>
+
+% if show_signup_immediately is not UNDEFINED:
+  ## NOTE: This won't work in production, because anonymous views are cached, so it will
+  ## show either with or without this extra js for 3 minutes at a time.
+<script type="text/javascript">
+  $(window).load(function() {$('#signup_action').trigger("click");});
+</script>
+% endif

@@ -1,0 +1,32 @@
+
+.t-signedin .wrapper-header .nav-pitch .action-signin,.view-util .wrapper-header .nav-pitch .action-signin {
+	-webkit-transition: background-color .15s,box-shadow .15s;
+	-moz-transition: background-color .15s,box-shadow .15s;
+	transition: background-color .15s,box-shadow .15s;
+	box-shadow: 0 1px 0 rgba(255,255,255,.3) inset,0 0 0 transparent;
+	display: inline-block;
+	padding: 4px 20px 5px;
+	background-color: rgba(255,255,255,.6);
+	background-image: -webkit-linear-gradient(top,rgba(255,255,255,.6),rgba(255,255,255,0));
+	background-image: linear-gradient(to bottom,rgba(255,255,255,.6),rgba(255,255,255,0));
+	box-shadow: 0 1px 0 rgba(255,255,255,.3) inset;
+	border: 1px solid #007fb8;
+	border-radius: 3px;
+	background-color: #009fe6;
+	color: #fff;
+	text-shadow: 0 1px 0 rgba(255,255,255,.5);
+	padding: 5px 10px;
+	text-transform: uppercase
+}
+
+.wrapper-footer footer.primary .footer-about-copyright {
+	width: 38.91489%;
+	float: left;
+	margin-left: 14.28571%
+}
+
+.not-signedin .wrapper-header .nav-pitch .action-signin:hover, .not-signedin .wrapper-header .nav-pitch .action-signin:focus, .view-util .wrapper-header .nav-pitch .action-signin:hover, .view-util .wrapper-header .nav-pitch .action-signin:focus {
+    background-color: #009fe6;
+    color: #fff;
+}
+

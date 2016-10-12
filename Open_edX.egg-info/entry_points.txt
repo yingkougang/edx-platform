@@ -1,0 +1,33 @@
+[openedx.block_structure_transformer]
+course_blocks_api = lms.djangoapps.course_api.blocks.transformers.blocks_api:BlocksAPITransformer
+library_content = lms.djangoapps.course_blocks.transformers.library_content:ContentLibraryTransformer
+proctored_exam = lms.djangoapps.course_api.blocks.transformers.proctored_exam:ProctoredExamTransformer
+split_test = lms.djangoapps.course_blocks.transformers.split_test:SplitTestTransformer
+start_date = lms.djangoapps.course_blocks.transformers.start_date:StartDateTransformer
+user_partitions = lms.djangoapps.course_blocks.transformers.user_partitions:UserPartitionTransformer
+visibility = lms.djangoapps.course_blocks.transformers.visibility:VisibilityTransformer
+
+[openedx.course_tab]
+ccx = lms.djangoapps.ccx.plugins:CcxCourseTab
+course_info = lms.djangoapps.courseware.tabs:CourseInfoTab
+courseware = lms.djangoapps.courseware.tabs:CoursewareTab
+discussion = lms.djangoapps.django_comment_client.forum.views:DiscussionTab
+edxnotes = lms.djangoapps.edxnotes.plugins:EdxNotesTab
+external_discussion = lms.djangoapps.courseware.tabs:ExternalDiscussionCourseTab
+external_link = lms.djangoapps.courseware.tabs:ExternalLinkCourseTab
+html_textbooks = lms.djangoapps.courseware.tabs:HtmlTextbookTabs
+instructor = lms.djangoapps.instructor.views.instructor_dashboard:InstructorDashboardTab
+notes = lms.djangoapps.notes.views:NotesTab
+pdf_textbooks = lms.djangoapps.courseware.tabs:PDFTextbookTabs
+progress = lms.djangoapps.courseware.tabs:ProgressTab
+static_tab = xmodule.tabs:StaticTab
+syllabus = lms.djangoapps.courseware.tabs:SyllabusTab
+teams = lms.djangoapps.teams.plugins:TeamsTab
+textbooks = lms.djangoapps.courseware.tabs:TextbookTabs
+wiki = lms.djangoapps.course_wiki.tab:WikiTab
+
+[openedx.user_partition_scheme]
+cohort = openedx.core.djangoapps.course_groups.partition_scheme:CohortPartitionScheme
+random = openedx.core.djangoapps.user_api.partition_schemes:RandomUserPartitionScheme
+verification = openedx.core.djangoapps.credit.partition_schemes:VerificationPartitionScheme
+
